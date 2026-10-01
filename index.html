@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>健康八要素｜一步一步顧好心臟、血管與大腦</title>
+<meta name="description" content="血壓、血脂、血糖、無菸、飲食、活動、體重、睡眠：用最新指引與高品質研究，教你每天做得到的方法。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC:wght@400;700&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F1F7F4; --card:#FFFFFF; --ink:#1E3638; --soft:#4F6B6D; --line:#D7E8E2;
+  --num:#0E8A7E; --num2:#BFE5DE; --hab:#E8603F; --hab2:#FAD3C6; --sun:#F2A541; --sun2:#FBE3B8;
+  --warn:#C2412D; --warnbg:#FDEDE8;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0F1F21; --card:#17302F; --ink:#EAF5F2; --soft:#A8C4C0; --line:#24443F;
+    --num2:#1E4B45; --hab2:#4A2A22; --sun2:#4A3A1C; --warnbg:#3A1F19; --warn:#FF9C86;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0F1F21; --card:#17302F; --ink:#EAF5F2; --soft:#A8C4C0; --line:#24443F;
+  --num2:#1E4B45; --hab2:#4A2A22; --sun2:#4A3A1C; --warnbg:#3A1F19; --warn:#FF9C86;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-behavior:smooth;scroll-padding-top:calc(76px + env(safe-area-inset-top,0px))}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans TC","Microsoft JhengHei","PingFang TC",sans-serif;font-size:19px;line-height:1.75;-webkit-font-smoothing:antialiased}
+.hand{font-family:"LXGW WenKai TC","Noto Sans TC","Microsoft JhengHei",serif}
+a{color:var(--num)}
+img{max-width:100%}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+
+/* hero */
+.hero{padding:44px 0 30px}
+.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:36px;align-items:center}
+.hero h1{font-size:clamp(40px,6vw,64px);line-height:1.2;margin:0 0 18px;font-weight:700}
+.hero p.sub{font-size:21px;color:var(--soft);margin:0 0 22px;max-width:30em}
+.split{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:22px}
+.split span{font-size:18px;font-weight:700;padding:8px 18px;border-radius:999px}
+.split .n{background:var(--num2);color:var(--ink)}
+.split .h{background:var(--hab2);color:var(--ink)}
+.hero .note{font-size:16px;color:var(--soft);background:var(--card);border-radius:16px;padding:14px 18px;border:2px dashed var(--line)}
+
+/* wheel */
+.wheel-box{background:var(--card);border-radius:32px;padding:22px;box-shadow:0 8px 0 var(--line)}
+.wheel-box h2{font-size:24px;margin:0 0 4px;text-align:center}
+.wheel-box .hint{font-size:16px;color:var(--soft);text-align:center;margin:0 0 8px}
+#wheel{width:100%;max-width:400px;display:block;margin:0 auto}
+#wheel .seg{cursor:pointer;transition:fill .3s,transform .2s;transform-origin:200px 200px}
+#wheel .seg:hover{transform:scale(1.02)}
+#wheel text{pointer-events:none;font-family:"Noto Sans TC",sans-serif;font-weight:900}
+.checks{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:12px}
+.cb{display:flex;align-items:center;gap:10px;border:0;background:var(--bg);color:var(--ink);border-radius:14px;padding:10px 12px;font:inherit;font-size:17px;font-weight:700;cursor:pointer;text-align:left;min-height:48px}
+.cb .bx{flex:none;width:26px;height:26px;border-radius:8px;border:3px solid var(--line);display:grid;place-items:center;font-size:16px;color:transparent}
+.cb[aria-pressed="true"] .bx{background:var(--num);border-color:var(--num);color:#fff}
+.cb.habit[aria-pressed="true"] .bx{background:var(--hab);border-color:var(--hab)}
+.cb:focus-visible{outline:3px solid var(--sun);outline-offset:2px}
+.score-msg{margin-top:12px;font-size:17px;font-weight:700;text-align:center;color:var(--soft)}
+
+/* nav */
+nav.top{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top,0px)}
+nav.top .wrap{display:flex;gap:8px;overflow-x:auto;padding-top:12px;padding-bottom:12px;scrollbar-width:none}
+nav.top .wrap::-webkit-scrollbar{display:none}
+nav.top a{flex:none;text-decoration:none;font-weight:700;font-size:17px;color:var(--ink);padding:8px 16px;border-radius:999px;background:var(--card);border:2px solid var(--line);white-space:nowrap}
+nav.top a.n{border-color:var(--num2)}
+nav.top a.h{border-color:var(--hab2)}
+nav.top a.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+
+/* intro band */
+.band{margin:34px 0;background:var(--card);border-radius:28px;padding:28px 30px;display:grid;grid-template-columns:auto 1fr;gap:26px;align-items:center}
+.band .big{font-size:52px;line-height:1;font-weight:900;color:var(--num)}
+.band p{margin:0;font-size:19px}
+
+/* section */
+.es{margin:46px 0;background:var(--card);border-radius:32px;overflow:hidden;box-shadow:0 8px 0 var(--line)}
+.es-head{padding:28px 30px 22px;display:grid;grid-template-columns:auto 1fr;gap:22px;align-items:center}
+.es-ico{width:84px;height:84px;border-radius:26px;display:grid;place-items:center}
+.es.n .es-ico{background:var(--num2)} .es.h .es-ico{background:var(--hab2)}
+.es-ico svg{width:50px;height:50px}
+.es-kind{font-size:15px;font-weight:700;color:var(--soft)}
+.es h2{font-size:clamp(30px,4.4vw,42px);line-height:1.25;margin:2px 0 0;font-weight:700}
+.goal{margin:0 30px;border-radius:22px;padding:20px 24px;display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.es.n .goal{background:var(--num2)} .es.h .goal{background:var(--hab2)}
+.goal b{display:block;font-size:15px;color:var(--soft);font-weight:700}
+.goal .v{font-size:26px;font-weight:900;line-height:1.35}
+.goal .v small{font-size:17px;font-weight:500;display:block;color:var(--soft)}
+.es-body{padding:24px 30px 30px;display:grid;grid-template-columns:1.25fr 1fr;gap:30px}
+.es-body h3{font-size:24px;margin:0 0 12px}
+.why{font-size:19px;margin:0 0 20px}
+ol.how{margin:0;padding:0;list-style:none;counter-reset:s;display:flex;flex-direction:column;gap:12px}
+ol.how li{counter-increment:s;position:relative;padding:14px 16px 14px 62px;background:var(--bg);border-radius:18px;font-size:18px;line-height:1.65}
+ol.how li::before{content:counter(s);position:absolute;left:14px;top:14px;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-weight:900;font-size:17px;color:#fff}
+.es.n ol.how li::before{background:var(--num)} .es.h ol.how li::before{background:var(--hab)}
+ol.how li b{font-weight:900}
+.ev{background:var(--sun2);border-radius:22px;padding:20px 22px;margin-bottom:18px}
+.ev h3{font-size:21px;margin-bottom:10px}
+.ev ul{margin:0;padding-left:1.1em;display:flex;flex-direction:column;gap:10px;font-size:17px;line-height:1.65}
+.ev sup a{text-decoration:none;font-weight:700;font-size:13px}
+.doc{background:var(--warnbg);border-radius:22px;padding:20px 22px}
+.doc h3{font-size:21px;color:var(--warn);margin-bottom:8px}
+.doc ul{margin:0;padding-left:1.1em;font-size:17px;line-height:1.65;display:flex;flex-direction:column;gap:6px}
+
+/* mini tools */
+.tool{margin-top:18px;background:var(--bg);border-radius:20px;padding:18px 20px}
+.tool h4{margin:0 0 10px;font-size:19px}
+.tool .row{display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end}
+.tool label{display:flex;flex-direction:column;font-size:15px;font-weight:700;color:var(--soft);gap:4px}
+.tool input{font:inherit;font-size:20px;width:120px;padding:8px 12px;border-radius:12px;border:2px solid var(--line);background:var(--card);color:var(--ink)}
+.tool button{font:inherit;font-size:18px;font-weight:900;border:0;border-radius:12px;padding:10px 20px;background:var(--ink);color:var(--bg);cursor:pointer;min-height:48px}
+.tool .out{margin-top:12px;font-size:18px;font-weight:700;min-height:1.6em}
+.pill{display:inline-block;padding:2px 12px;border-radius:999px;color:#fff;font-size:16px;margin-left:6px}
+
+/* smoke trio */
+.trio{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:0 30px}
+.trio div{border-radius:20px;padding:16px 18px;background:var(--hab2)}
+.trio b{display:block;font-size:22px;font-weight:900}
+.trio span{font-size:16px;line-height:1.6;display:block;margin-top:4px}
+
+/* plate */
+.plate{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
+.plate div{background:var(--card);border:2px solid var(--line);border-radius:16px;padding:10px 12px;font-size:16px;font-weight:700;line-height:1.5;text-align:center}
+
+/* refs */
+.refs{margin:56px 0 30px;background:var(--card);border-radius:28px;padding:28px 30px}
+.refs h2{font-size:30px;margin:0 0 6px}
+.refs p.lead{color:var(--soft);font-size:17px;margin:0 0 16px}
+.refs ol{margin:0;padding-left:1.6em;font-size:15.5px;line-height:1.7;display:flex;flex-direction:column;gap:8px;color:var(--soft)}
+.refs ol li{scroll-margin-top:90px;overflow-wrap:anywhere}
+.refs ol li:target{background:var(--sun2);border-radius:8px}
+.disc{margin:0 0 30px;font-size:16px;color:var(--soft);background:var(--card);border-radius:22px;padding:20px 24px;border:2px dashed var(--line)}
+footer{padding:20px 0 50px;text-align:center;font-size:16px;color:var(--soft)}
+footer b{color:var(--ink)}
+.totop{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));width:52px;height:52px;border-radius:50%;border:0;background:var(--ink);color:var(--bg);font-size:22px;cursor:pointer;opacity:0;pointer-events:none;transition:opacity .3s;z-index:30}
+.totop.show{opacity:.9;pointer-events:auto}
+
+@media (max-width:860px){
+  .hero-grid,.es-body{grid-template-columns:1fr}
+  .goal{grid-template-columns:1fr;margin:0 18px}
+  .trio{grid-template-columns:1fr;margin:0 18px}
+  .es-head{padding:22px 18px 18px;gap:16px}
+  .es-ico{width:68px;height:68px;border-radius:20px}.es-ico svg{width:40px;height:40px}
+  .es-body{padding:20px 18px 24px}
+  .band{grid-template-columns:1fr;padding:22px}
+  .refs{padding:22px 18px}
+  .plate{grid-template-columns:repeat(2,1fr)}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <h1 class="hand">健康八要素<br>一步一步顧好<br>心臟、血管與大腦</h1>
+      <p class="sub">美國心臟協會提出的「健康八要素」（Life's Essential 8），是目前評估心血管健康最常用的架構。這一頁把每個要素的目標、做法和研究證據整理好，讓你知道從哪裡開始。</p>
+      <div class="split"><span class="n">四個數字：血壓・血脂・血糖・體重</span><span class="h">四個習慣：無菸・飲食・活動・睡眠</span></div>
+      <p class="note">本頁是健康促進的知識整理，不能取代醫師診斷。是否需要藥物或其他治療，請和你的醫師討論；正在接受治療的人，請不要自行停藥或改變治療。</p>
+    </div>
+    <div class="wheel-box">
+      <h2 class="hand">我的健康輪</h2>
+      <p class="hint">做到的就點一下，點輪子可跳到該段</p>
+      <svg id="wheel" viewBox="0 0 400 400" role="img" aria-label="健康八要素自我檢查輪"></svg>
+      <div class="checks" id="checks"></div>
+      <div class="score-msg" id="scoreMsg">挑一項還沒做到的，從今天開始。</div>
+    </div>
+  </div>
+</header>
+
+<nav class="top" aria-label="八要素快速選單">
+  <div class="wrap" id="navlinks">
+    <a class="n" href="#bp">血壓</a><a class="n" href="#lipid">血脂</a><a class="n" href="#glucose">血糖</a><a class="h" href="#smoke">無菸</a>
+    <a class="h" href="#diet">飲食</a><a class="h" href="#move">活動</a><a class="n" href="#weight">體重</a><a class="h" href="#sleep">睡眠</a><a href="#refs">文獻</a>
+  </div>
+</nav>
+
+<main class="wrap">
+
+<div class="band">
+  <div class="big hand">一次<br>一項</div>
+  <p>八項不用一次做到。研究發現，健康八要素的總分越高，日後發生心臟病、中風的風險越低<sup><a href="#r1">1</a></sup>；而且這些要素彼此牽動：多走路會同時幫到血壓、血糖、體重和睡眠。<b>先挑一項你最有把握的，做兩週，再加下一項。</b></p>
+</div>
+
+<!-- 1 BP -->
+<section class="es n" id="bp">
+  <div class="es-head">
+    <div class="es-ico"><svg viewBox="0 0 48 48" fill="none" stroke="#0E8A7E" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M24 41s-15-9-15-20a8 8 0 0 1 15-4 8 8 0 0 1 15 4c0 11-15 20-15 20z"/><path d="M12 24h7l3-5 4 9 3-4h7"/></svg></div>
+    <div><div class="es-kind">數字 1</div><h2 class="hand">如何控制血壓</h2></div>
+  </div>
+  <div class="goal">
+    <div><b>理想目標</b><div class="v">低於 120 / 80 mmHg<small>健康八要素的滿分標準</small></div></div>
+    <div><b>台灣的高血壓標準</b><div class="v">130 / 80 mmHg 以上<small>2022 台灣高血壓指引；2025 美國指引也建議多數人控制在 130/80 以下</small></div></div>
+  </div>
+  <div class="es-body">
+    <div>
+      <p class="why">高血壓常常沒有感覺，卻會慢慢傷害血管、心臟、腎臟和大腦。2025 年美國心臟協會與心臟學院的新指引特別指出，及早把收縮壓控制在 130 以下，也有助於預防認知退化與失智<sup><a href="#r2">2</a></sup>。</p>
+      <h3>怎麼做</h3>
+      <ol class="how">
+        <li><b>在家量血壓，用「722」原則：</b>連續 7 天、每天早晚 2 次、每次量 2 遍取平均。早上在起床一小時內、上完廁所、吃早餐前量；晚上在睡前量<sup><a href="#r3">3</a></sup>。</li>
+        <li><b>吃得淡一點：</b>每天鈉不超過 2,400 毫克（約 6 公克鹽）。少吃加工品、醃漬物、湯汁和沾醬；外食先撈起來再吃<sup><a href="#r6">6</a></sup>。</li>
+        <li><b>多吃蔬果和全穀：</b>「得舒飲食」（DASH）以蔬菜、水果、全穀、低脂乳品、豆類、堅果為主，搭配減鈉，降壓效果最明顯<sup><a href="#r6">6</a></sup>。</li>
+        <li><b>規律運動，也可以加入「靜態用力」：</b>快走、騎車都有效；靠牆半蹲、握力球這類等長運動，在研究中降壓效果特別好<sup><a href="#r5">5</a></sup>。</li>
+        <li><b>體重過重的人，減一點就有幫助：</b>大約每減 1 公斤，血壓可下降約 1 mmHg<sup><a href="#r2">2</a></sup>。</li>
+        <li><b>少喝酒、管理壓力、睡飽：</b>新指引建議限制或避免飲酒，並用呼吸練習、冥想等方式減壓<sup><a href="#r2">2</a></sup>。</li>
+      </ol>
+      <div class="tool" id="bpTool">
+        <h4>算算我的居家血壓平均</h4>
+        <div class="row">
+          <label>收縮壓平均<input type="number" inputmode="numeric" id="sbp" placeholder="例 128"></label>
+          <label>舒張壓平均<input type="number" inputmode="numeric" id="dbp" placeholder="例 78"></label>
+          <button type="button" id="bpBtn">看結果</button>
+        </div>
+        <div class="out" id="bpOut" aria-live="polite"></div>
+      </div>
+    </div>
+    <div>
+      <div class="ev"><h3>實證重點</h3><ul>
+        <li>2025 美國高血壓指引：生活型態調整是所有血壓分級的基礎；新增建議「含鉀代鹽」可用來預防與治療血壓偏高<sup><a href="#r2">2</a></sup>。</li>
+        <li>中國 600 個村莊、約 2 萬 1 千人的大型隨機試驗：改用含鉀代鹽 5 年，中風減少約 14%、重大心血管事件減少約 13%<sup><a href="#r4">4</a></sup>。</li>
+        <li>270 篇隨機試驗的統合分析：各種運動都能降血壓，其中等長運動（如靠牆半蹲）降幅最大<sup><a href="#r5">5</a></sup>。</li>
+      </ul></div>
+      <div class="doc"><h3>這些情況，請找醫師</h3><ul>
+        <li>居家血壓平均在 130/80 以上。</li>
+        <li>有腎臟病，或醫師說要限制鉀的人，使用含鉀代鹽前請先問醫師。</li>
+        <li>血壓 180/120 以上，同時有胸痛、喘、頭痛、手腳無力或說話不清，請立即就醫。</li>
+      </ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- 2 Lipid -->
+<section class="es n" id="lipid">
+  <div class="es-head">
+    <div class="es-ico"><svg viewBox="0 0 48 48" fill="none" stroke="#0E8A7E" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 18h36M6 30h36"/><circle cx="18" cy="24" r="4"/><circle cx="30" cy="24" r="3"/><path d="M6 18c0-6 6-8 9-8M42 30c0 6-6 8-9 8"/></svg></div>
+    <div><div class="es-kind">數字 2</div><h2 class="hand">如何控制血脂</h2></div>
+  </div>
+  <div class="goal">
+    <div><b>理想目標</b><div class="v">非高密度膽固醇 &lt; 130 mg/dL<small>健康八要素用「總膽固醇減 HDL」來計分</small></div></div>
+    <div><b>健檢常見參考值</b><div class="v">總膽固醇 &lt; 200、LDL &lt; 130<small>三酸甘油酯 &lt; 150；個人的 LDL 目標依風險而定，請問醫師</small></div></div>
+  </div>
+  <div class="es-body">
+    <div>
+      <p class="why">血液裡過多的「壞膽固醇」（LDL）會堆積在血管壁，形成斑塊，日積月累造成心肌梗塞和中風。血脂異常同樣沒有症狀，只能靠抽血發現<sup><a href="#r9">9</a></sup>。</p>
+      <h3>怎麼做</h3>
+      <ol class="how">
+        <li><b>換油不是不吃油：</b>用橄欖油、芥花油、堅果、魚類的不飽和脂肪，取代肥肉、豬油、奶油等飽和脂肪<sup><a href="#r10">10</a></sup>。</li>
+        <li><b>避開反式脂肪：</b>酥皮、油炸點心、部分烘焙品要特別留意營養標示<sup><a href="#r10">10</a></sup>。</li>
+        <li><b>多吃可溶性纖維：</b>燕麥、豆類、蔬菜水果，可以幫忙降低 LDL<sup><a href="#r10">10</a></sup>。</li>
+        <li><b>少喝含糖飲料、少吃精緻澱粉：</b>這些會讓三酸甘油酯升高。</li>
+        <li><b>每週動 150 分鐘、戒菸：</b>運動和戒菸都能幫助提升「好膽固醇」（HDL）。</li>
+        <li><b>知道自己的數字：</b>成人定期抽血檢查血脂；家族有人很早就心臟病發作，更要提早檢查。</li>
+      </ol>
+    </div>
+    <div>
+      <div class="ev"><h3>實證重點</h3><ul>
+        <li>歐洲心臟學會與動脈硬化學會指引：LDL 越低、維持越久，心血管風險越低；血脂目標依每個人的整體風險分級訂定<sup><a href="#r9">9</a></sup>。</li>
+        <li>美國心臟協會 2021 飲食指引：以植物性油脂取代動物性脂肪、選擇全穀與豆類，是改善血脂的核心飲食原則<sup><a href="#r10">10</a></sup>。</li>
+        <li>地中海飲食隨機試驗（PREDIMED）：搭配橄欖油或堅果的地中海飲食，重大心血管事件減少約三成<sup><a href="#r11">11</a></sup>。</li>
+      </ul></div>
+      <div class="doc"><h3>這些情況，請找醫師</h3><ul>
+        <li>健檢出現血脂紅字，或已有糖尿病、高血壓、腎臟病。</li>
+        <li>LDL 非常高（例如 190 以上），或家人很年輕就有心肌梗塞。</li>
+        <li>是否需要藥物，由醫師依你的整體風險判斷。</li>
+      </ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- 3 Glucose -->
+<section class="es n" id="glucose">
+  <div class="es-head">
+    <div class="es-ico"><svg viewBox="0 0 48 48" fill="none" stroke="#0E8A7E" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M24 6s12 14 12 23a12 12 0 0 1-24 0C12 20 24 6 24 6z"/><path d="M19 30a5 5 0 0 0 5 5"/></svg></div>
+    <div><div class="es-kind">數字 3</div><h2 class="hand">如何控制血糖</h2></div>
+  </div>
+  <div class="goal">
+    <div><b>理想目標</b><div class="v">空腹血糖 &lt; 100 mg/dL<small>或糖化血色素 HbA1c &lt; 5.7%</small></div></div>
+    <div><b>糖尿病前期</b><div class="v">空腹 100–125 或 HbA1c 5.7–6.4%<small>這是逆轉的黃金時期</small></div></div>
+  </div>
+  <div class="es-body">
+    <div>
+      <p class="why">血糖長期偏高會損傷大小血管，影響心臟、腎臟、眼睛、神經，也和失智風險相關。好消息是：糖尿病前期透過生活型態調整，很多人可以延緩甚至避免進展成糖尿病<sup><a href="#r7">7</a></sup>。</p>
+      <h3>怎麼做</h3>
+      <ol class="how">
+        <li><b>體重過重的人，減掉 5–7%：</b>70 公斤的人大約減 3.5–5 公斤，就有明顯效果<sup><a href="#r7">7</a></sup>。</li>
+        <li><b>每週至少 150 分鐘中等強度活動：</b>就算體重沒降，光是做到這點也能降低發病風險<sup><a href="#r7">7</a></sup>。</li>
+        <li><b>飯後走一走：</b>餐後 15–30 分鐘輕鬆散步，能壓低飯後血糖高峰<sup><a href="#r20">20</a></sup>。</li>
+        <li><b>主食選全穀、多吃纖維：</b>糙米、燕麥、地瓜取代部分白飯白麵，蔬菜吃夠量。</li>
+        <li><b>戒掉含糖飲料：</b>手搖飲改無糖或微糖，再慢慢換成白開水、無糖茶。</li>
+        <li><b>定期檢查：</b>糖尿病前期的人，每年檢查一次血糖<sup><a href="#r7">7</a></sup>。</li>
+      </ol>
+    </div>
+    <div>
+      <div class="ev"><h3>實證重點</h3><ul>
+        <li>美國糖尿病預防計畫（DPP）隨機試驗：生活型態介入讓糖尿病發生率降低 58%<sup><a href="#r8">8</a></sup>。</li>
+        <li>美國糖尿病學會 2026 照護標準：每週 150 分鐘活動即使沒有達到減重目標，仍讓第 2 型糖尿病發生率降低 44%；減重 7–10% 預防效果更好<sup><a href="#r7">7</a></sup>。</li>
+        <li>統合分析：飯後短時間輕度走路，就能降低飯後血糖<sup><a href="#r20">20</a></sup>。</li>
+      </ul></div>
+      <div class="doc"><h3>這些情況，請找醫師</h3><ul>
+        <li>空腹血糖 126 以上，或 HbA1c 6.5% 以上。</li>
+        <li>常常口渴、多尿、體重莫名下降、傷口不易好。</li>
+        <li>已經在治療的人，飲食與運動調整請和醫療團隊討論。</li>
+      </ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- 4 Smoke -->
+<section class="es h" id="smoke">
+  <div class="es-head">
+    <div class="es-ico"><svg viewBox="0 0 48 48" fill="none" stroke="#E8603F" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="26" width="30" height="7" rx="2"/><path d="M40 26v7M36 18c0-4 4-4 4-8"/><path d="M8 8l32 32"/></svg></div>
+    <div><div class="es-kind">習慣 1</div><h2 class="hand">如何避開一手菸、二手菸、三手菸</h2></div>
+  </div>
+  <div class="trio">
+    <div><b>一手菸</b><span>自己吸菸，包括紙菸、雪茄、電子煙、加熱菸。</span></div>
+    <div><b>二手菸</b><span>吸到別人吐出或菸品燃燒的煙。沒有安全劑量<sup><a href="#r15">15</a></sup>。</span></div>
+    <div><b>三手菸</b><span>煙散了以後，殘留在牆壁、沙發、衣服、頭髮、車內的有害物質<sup><a href="#r16">16</a></sup>。</span></div>
+  </div>
+  <div class="es-body">
+    <div>
+      <p class="why">健康八要素的「無菸」不只看自己有沒有抽，也看家裡有沒有人抽。三手菸會附著在室內表面和灰塵中，開窗、開電扇都很難清除；常在地上爬、摸東西、往嘴裡放的嬰幼兒最容易受害<sup><a href="#r16">16</a></sup>。</p>
+      <h3>怎麼做</h3>
+      <ol class="how">
+        <li><b>想戒菸，不用自己硬撐：</b>撥打免費戒菸專線 0800-636-363，或到有「戒菸服務」的醫療院所、藥局，可獲得專業諮詢與協助<sup><a href="#r17">17</a></sup>。</li>
+        <li><b>家裡、車裡全面無菸：</b>只在陽台或窗邊抽並不足夠，煙和殘留物仍會進到室內。</li>
+        <li><b>抽完菸先換衣、洗手、漱口，再抱小孩或長輩：</b>減少三手菸接觸。</li>
+        <li><b>入住曾有人吸菸的房子或二手車：</b>清洗或更換窗簾、地毯、布沙發，牆面重新清潔粉刷。</li>
+        <li><b>電子煙、加熱菸不是安全的替代品：</b>台灣 2023 年修法後，電子煙全面禁止，加熱菸須經健康風險評估審查<sup><a href="#r17">17</a></sup>。</li>
+        <li><b>被二手菸困擾時，溫和而明確地表達：</b>「我和孩子對菸味很敏感，可以請你到外面嗎？」</li>
+      </ol>
+    </div>
+    <div>
+      <div class="ev"><h3>實證重點</h3><ul>
+        <li>美國衛生署長報告：二手菸沒有無風險的暴露量，室內分區、通風都無法完全保護不吸菸者<sup><a href="#r15">15</a></sup>。</li>
+        <li>三手菸研究：吸菸家庭中，幾乎所有孩子生活環境的表面和灰塵都驗出尼古丁，近半數驗出致癌物 NNK，即使家裡有室內禁菸規定也可能殘留<sup><a href="#r18">18</a></sup>。</li>
+        <li>世界衛生組織整理：戒菸 1 年，冠心病風險約降為吸菸者的一半；戒菸 5–15 年，中風風險降到接近不吸菸者<sup><a href="#r19">19</a></sup>。</li>
+      </ul></div>
+      <div class="doc"><h3>這些情況，請找醫師</h3><ul>
+        <li>試過自己戒菸但一直失敗：戒菸門診可以提供完整的協助方案。</li>
+        <li>長期咳嗽、有痰、走路容易喘，請檢查肺功能。</li>
+      </ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- 5 Diet -->
+<section class="es h" id="diet">
+  <div class="es-head">
+    <div class="es-ico"><svg viewBox="0 0 48 48" fill="none" stroke="#E8603F" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="26" r="15"/><path d="M24 11v15h15"/><path d="M14 6v6M34 6v6"/></svg></div>
+    <div><div class="es-kind">習慣 2</div><h2 class="hand">如何健康飲食</h2></div>
+  </div>
+  <div class="goal">
+    <div><b>理想目標</b><div class="v">接近得舒飲食、地中海飲食<small>蔬果、全穀、豆類、堅果、魚，少加工、少鹽、少糖</small></div></div>
+    <div><b>台灣版本</b><div class="v">國健署「我的餐盤」<small>六句口訣，每餐對照就好</small></div></div>
+  </div>
+  <div class="es-body">
+    <div>
+      <p class="why">飲食同時影響血壓、血脂、血糖和體重，是八要素裡牽動最廣的一項。重點不是某一種「超級食物」，而是長期的整體飲食型態<sup><a href="#r10">10</a></sup>。</p>
+      <h3>怎麼做：「我的餐盤」六句口訣<sup><a href="#r21">21</a></sup></h3>
+      <div class="plate">
+        <div>每天早晚<br>一杯奶</div><div>每餐水果<br>拳頭大</div><div>菜比水果<br>多一點</div>
+        <div>飯跟蔬菜<br>一樣多</div><div>豆魚蛋肉<br>一掌心</div><div>堅果種子<br>一茶匙</div>
+      </div>
+      <ol class="how" style="margin-top:16px">
+        <li><b>主食至少三分之一換成全穀雜糧：</b>糙米、燕麥、地瓜、玉米<sup><a href="#r21">21</a></sup>。</li>
+        <li><b>蛋白質優先選豆、魚、蛋，再來才是肉：</b>加工肉品（香腸、火腿、培根）少吃<sup><a href="#r10">10</a></sup>。</li>
+        <li><b>減少超加工食品：</b>泡麵、餅乾、含糖飲料、即食調理包，盡量以原型食物取代<sup><a href="#r12">12</a></sup>。</li>
+        <li><b>吃飯先看營養標示：</b>鈉、糖、反式脂肪越低越好。</li>
+        <li><b>長輩記得吃夠蛋白質：</b>每餐都有一掌心的豆魚蛋肉，搭配運動才能保住肌肉。</li>
+      </ol>
+    </div>
+    <div>
+      <div class="ev"><h3>實證重點</h3><ul>
+        <li>美國心臟協會 2021 飲食指引：強調整體飲食型態，包括多蔬果全穀、植物性蛋白、液態植物油、少加工與少添加糖鹽<sup><a href="#r10">10</a></sup>。</li>
+        <li>地中海飲食隨機試驗（PREDIMED）：重大心血管事件減少約三成<sup><a href="#r11">11</a></sup>。</li>
+        <li>2024 年《英國醫學期刊》傘狀回顧：超加工食品吃越多，與心血管疾病死亡、第 2 型糖尿病、焦慮憂鬱等多種不良健康結果相關<sup><a href="#r12">12</a></sup>。</li>
+      </ul></div>
+      <div class="doc"><h3>這些情況，請找專業人員</h3><ul>
+        <li>有腎臟病、糖尿病、吞嚥困難等，飲食需要個別調整，請諮詢醫師或營養師。</li>
+        <li>長輩食慾變差、體重下降，請盡早評估營養狀況。</li>
+      </ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- 6 Move -->
+<section class="es h" id="move">
+  <div class="es-head">
+    <div class="es-ico"><svg viewBox="0 0 48 48" fill="none" stroke="#E8603F" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="28" cy="8" r="4"/><path d="M18 22l8-6 6 8 6 2M26 16l-4 14-8 10M22 30l8 4 2 10"/></svg></div>
+    <div><div class="es-kind">習慣 3</div><h2 class="hand">如何規律活動</h2></div>
+  </div>
+  <div class="goal">
+    <div><b>理想目標</b><div class="v">每週 150 分鐘中等強度<small>或 75 分鐘較費力的運動</small></div></div>
+    <div><b>好記的目標</b><div class="v">每天約 7,000 步<small>從現在的步數，每天多走一點就有幫助</small></div></div>
+  </div>
+  <div class="es-body">
+    <div>
+      <p class="why">活動量是少數能同時改善血壓、血糖、血脂、體重、睡眠和情緒的方法。對長輩來說，肌力和平衡訓練還能預防跌倒，維持自己出門、做家事的能力<sup><a href="#r13">13</a></sup>。</p>
+      <h3>怎麼做</h3>
+      <ol class="how">
+        <li><b>有氧：每週 150–300 分鐘中等強度。</b>強度的判斷方式：可以講話、但不能唱歌。可以拆成每次 10 分鐘，慢慢累積<sup><a href="#r13">13</a></sup>。</li>
+        <li><b>肌力：每週至少 2 天。</b>坐站練習、彈力帶、提水瓶都可以，練到大腿、臀部、背部、手臂<sup><a href="#r13">13</a></sup>。</li>
+        <li><b>65 歲以上：每週至少 3 天加入平衡訓練。</b>例如扶椅單腳站、走直線、太極拳<sup><a href="#r13">13</a></sup>。</li>
+        <li><b>減少久坐：</b>每坐 30–60 分鐘，起來走一走、伸展一下。</li>
+        <li><b>用步數幫自己加油：</b>先記錄一週平均步數，每週多加 500–1,000 步，朝每天 7,000 步前進<sup><a href="#r14">14</a></sup>。</li>
+      </ol>
+    </div>
+    <div>
+      <div class="ev"><h3>實證重點</h3><ul>
+        <li>世界衛生組織 2020 身體活動指引：任何活動都比不動好，做得越多越有益；長者應加入多元的平衡與肌力訓練<sup><a href="#r13">13</a></sup>。</li>
+        <li>2025 年《刺胳針公共衛生》統合分析（57 篇研究）：和每天 2,000 步相比，每天 7,000 步的全死因死亡風險低約 47%、失智風險低約 38%、跌倒風險低約 28%<sup><a href="#r14">14</a></sup>。</li>
+        <li>同一研究也發現，多數健康效益在每天 5,000–7,000 步左右開始趨緩，7,000 步是更容易達成的目標<sup><a href="#r14">14</a></sup>。</li>
+      </ul></div>
+      <div class="doc"><h3>這些情況，先停下來找醫師</h3><ul>
+        <li>運動時胸痛、胸悶、異常喘、頭暈、心跳很不規則。</li>
+        <li>有心臟病、未控制的高血壓或關節疼痛，開始新的運動計畫前先諮詢醫師或物理治療師。</li>
+      </ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- 7 Weight -->
+<section class="es n" id="weight">
+  <div class="es-head">
+    <div class="es-ico"><svg viewBox="0 0 48 48" fill="none" stroke="#0E8A7E" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="9" width="34" height="32" rx="8"/><path d="M17 20a10 10 0 0 1 14 0M24 20l3-4"/></svg></div>
+    <div><div class="es-kind">數字 4</div><h2 class="hand">如何維持健康體重</h2></div>
+  </div>
+  <div class="goal">
+    <div><b>台灣成人標準</b><div class="v">BMI 18.5–24<small>24–27 過重，27 以上肥胖</small></div></div>
+    <div><b>腰圍</b><div class="v">男 &lt; 90 公分、女 &lt; 80 公分<small>腰圍反映腹部脂肪，和代謝風險更相關</small></div></div>
+  </div>
+  <div class="es-body">
+    <div>
+      <p class="why">過重與肥胖會推高血壓、血糖、血脂。但長輩要特別注意「太瘦」也是風險：肌肉流失會增加跌倒和失能。所以目標是<b>保住肌肉、減少腹部脂肪</b>，而不是單純追求體重數字<sup><a href="#r22">22</a></sup>。</p>
+      <h3>怎麼做</h3>
+      <ol class="how">
+        <li><b>先量腰圍：</b>站直、輕鬆呼氣，皮尺繞過肚臍上緣量一圈。</li>
+        <li><b>過重的人，從減 5% 開始：</b>例如 80 公斤減 4 公斤，血壓、血糖、血脂就會開始改善<sup><a href="#r7">7</a></sup>。</li>
+        <li><b>慢慢減，每週約 0.5–1 公斤：</b>太快容易掉肌肉、也容易復胖。</li>
+        <li><b>飲食＋運動一起來：</b>只節食容易流失肌肉，搭配肌力訓練與足夠蛋白質。</li>
+        <li><b>每週固定時間量體重：</b>看趨勢，不必天天在意小起伏。</li>
+      </ol>
+      <div class="tool">
+        <h4>算算我的 BMI</h4>
+        <div class="row">
+          <label>身高（公分）<input type="number" inputmode="decimal" id="ht" placeholder="例 160"></label>
+          <label>體重（公斤）<input type="number" inputmode="decimal" id="wt" placeholder="例 58"></label>
+          <button type="button" id="bmiBtn">計算</button>
+        </div>
+        <div class="out" id="bmiOut" aria-live="polite"></div>
+      </div>
+    </div>
+    <div>
+      <div class="ev"><h3>實證重點</h3><ul>
+        <li>美國糖尿病學會照護標準：減重 5–7% 以上即可改善血糖與心血管危險因子，糖尿病前期者減重 7–10% 預防效果更好<sup><a href="#r7">7</a></sup>。</li>
+        <li>台灣國民健康署以 BMI 18.5–24 為健康體重範圍，並以腰圍男 90、女 80 公分作為腹部肥胖的判斷<sup><a href="#r22">22</a></sup>。</li>
+      </ul></div>
+      <div class="doc"><h3>這些情況，請找醫師</h3><ul>
+        <li>沒有刻意減重，半年到一年內體重掉了 5% 以上。</li>
+        <li>BMI 27 以上又合併高血壓、血糖異常等，可以和醫師討論體重管理方案。</li>
+        <li>長輩體重過輕或吃不下，請評估營養與肌少症。</li>
+      </ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- 8 Sleep -->
+<section class="es h" id="sleep">
+  <div class="es-head">
+    <div class="es-ico"><svg viewBox="0 0 48 48" fill="none" stroke="#E8603F" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M38 30A16 16 0 1 1 20 9a13 13 0 0 0 18 21z"/><path d="M32 8h6l-6 7h6"/></svg></div>
+    <div><div class="es-kind">習慣 4</div><h2 class="hand">如何睡眠充足</h2></div>
+  </div>
+  <div class="goal">
+    <div><b>理想目標</b><div class="v">每晚 7–9 小時<small>健康八要素的滿分範圍（成人）</small></div></div>
+    <div><b>不只看時數</b><div class="v">固定作息、睡得安穩<small>白天精神好，是睡得夠的最好指標</small></div></div>
+  </div>
+  <div class="es-body">
+    <div>
+      <p class="why">睡眠是 2022 年才新加入的要素。睡太少或作息混亂，會讓血壓、血糖、食慾和情緒都變得難以控制；睡眠也是大腦清理與修復的重要時間<sup><a href="#r1">1</a></sup>。</p>
+      <h3>怎麼做</h3>
+      <ol class="how">
+        <li><b>每天固定時間起床，假日也一樣：</b>起床時間固定，比固定上床時間更重要。</li>
+        <li><b>早上曬太陽、白天多活動：</b>幫身體的生理時鐘對時。</li>
+        <li><b>午睡不超過 30 分鐘，下午 3 點後不睡。</b></li>
+        <li><b>下午以後少喝咖啡、濃茶；睡前不喝酒：</b>酒精會讓下半夜睡不安穩。</li>
+        <li><b>床只用來睡覺：</b>躺了 20 分鐘還睡不著，就起來到別的地方做安靜的事，有睏意再回床。</li>
+        <li><b>睡前一小時調暗燈光、放下手機。</b></li>
+      </ol>
+    </div>
+    <div>
+      <div class="ev"><h3>實證重點</h3><ul>
+        <li>美國睡眠醫學會與睡眠研究學會共識：成人規律睡 7 小時以上，才能維持最佳健康<sup><a href="#r23">23</a></sup>。</li>
+        <li>美國心臟協會將睡眠納入心血管健康八要素，以 7–9 小時為理想<sup><a href="#r1">1</a></sup>。</li>
+        <li>美國內科醫師學會指引：慢性失眠的第一線處理，是失眠認知行為治療（CBT-I）<sup><a href="#r24">24</a></sup>。</li>
+      </ul></div>
+      <div class="doc"><h3>這些情況，請找醫師</h3><ul>
+        <li>大聲打鼾、被說睡覺時會停止呼吸、白天很嗜睡：可能是睡眠呼吸中止症。</li>
+        <li>失眠每週 3 晚以上、持續超過 3 個月，影響白天生活。</li>
+        <li>情緒低落、對事情失去興趣，合併睡眠問題。</li>
+      </ul></div>
+    </div>
+  </div>
+</section>
+
+<section class="refs" id="refs">
+  <h2 class="hand">參考文獻</h2>
+  <p class="lead">以國際與台灣最新臨床指引、隨機對照試驗與系統性回顧為主。內容為知識轉譯，詳細內容請以原文為準。</p>
+  <ol>
+    <li id="r1">Lloyd-Jones DM, et al. Life's Essential 8: Updating and Enhancing the American Heart Association's Construct of Cardiovascular Health. <i>Circulation</i>. 2022;146(5):e18–e43.</li>
+    <li id="r2">Jones DW, et al. 2025 AHA/ACC/AANP/AAPA/ABC/ACCP/ACPM/AGS/AMA/ASPC/NMA/PCNA/SGIM Guideline for the Prevention, Detection, Evaluation and Management of High Blood Pressure in Adults. <i>Hypertension</i> / <i>J Am Coll Cardiol</i>. 2025. doi:10.1016/j.jacc.2025.05.007</li>
+    <li id="r3">台灣心臟學會、台灣高血壓學會。2022 年台灣高血壓治療指引（Wang TD, et al. <i>Acta Cardiol Sin</i>. 2022;38:225–325）。</li>
+    <li id="r4">Neal B, et al. Effect of Salt Substitution on Cardiovascular Events and Death (SSaSS). <i>N Engl J Med</i>. 2021;385:1067–1077.</li>
+    <li id="r5">Edwards JJ, et al. Exercise training and resting blood pressure: a large-scale pairwise and network meta-analysis of randomised controlled trials. <i>Br J Sports Med</i>. 2023;57:1317–1326.</li>
+    <li id="r6">Sacks FM, et al. Effects on Blood Pressure of Reduced Dietary Sodium and the DASH Diet. <i>N Engl J Med</i>. 2001;344:3–10；衛生福利部國民健康署每日鈉攝取建議。</li>
+    <li id="r7">American Diabetes Association Professional Practice Committee. Prevention or Delay of Diabetes and Associated Comorbidities: Standards of Care in Diabetes—2026. <i>Diabetes Care</i>. 2026;49(Suppl 1).</li>
+    <li id="r8">Knowler WC, et al. Reduction in the Incidence of Type 2 Diabetes with Lifestyle Intervention or Metformin (DPP). <i>N Engl J Med</i>. 2002;346:393–403.</li>
+    <li id="r9">Mach F, et al. 2019 ESC/EAS Guidelines for the management of dyslipidaemias. <i>Eur Heart J</i>. 2020;41:111–188；台灣血脂及動脈硬化學會等，台灣血脂治療指引。</li>
+    <li id="r10">Lichtenstein AH, et al. 2021 Dietary Guidance to Improve Cardiovascular Health: A Scientific Statement From the American Heart Association. <i>Circulation</i>. 2021;144:e472–e487.</li>
+    <li id="r11">Estruch R, et al. Primary Prevention of Cardiovascular Disease with a Mediterranean Diet Supplemented with Extra-Virgin Olive Oil or Nuts (PREDIMED). <i>N Engl J Med</i>. 2018;378:e34.</li>
+    <li id="r12">Lane MM, et al. Ultra-processed food exposure and adverse health outcomes: umbrella review of epidemiological meta-analyses. <i>BMJ</i>. 2024;384:e077310.</li>
+    <li id="r13">Bull FC, et al. World Health Organization 2020 guidelines on physical activity and sedentary behaviour. <i>Br J Sports Med</i>. 2020;54:1451–1462.</li>
+    <li id="r14">Ding D, et al. Daily steps and health outcomes in adults: a systematic review and dose-response meta-analysis. <i>Lancet Public Health</i>. 2025. doi:10.1016/S2468-2667(25)00164-1</li>
+    <li id="r15">U.S. Department of Health and Human Services. The Health Consequences of Involuntary Exposure to Tobacco Smoke: A Report of the Surgeon General. 2006.</li>
+    <li id="r16">Jacob P 3rd, et al. Thirdhand Smoke: New Evidence, Challenges, and Future Directions. <i>Chem Res Toxicol</i>. 2017;30:270–294.</li>
+    <li id="r17">衛生福利部國民健康署：戒菸服務與免付費戒菸專線 0800-636-363；《菸害防制法》2023 年修正施行。</li>
+    <li id="r18">Merianos AL, et al. 家中三手菸表面與灰塵暴露研究（University of Cincinnati，2024）。</li>
+    <li id="r19">World Health Organization. Health benefits of smoking cessation（戒菸的健康效益）.</li>
+    <li id="r20">Buffey AJ, et al. The Acute Effects of Interrupting Prolonged Sitting Time in Adults with Standing and Light-Intensity Walking on Biomarkers of Cardiometabolic Health: A Systematic Review and Meta-analysis. <i>Sports Med</i>. 2022;52:1765–1787.</li>
+    <li id="r21">衛生福利部國民健康署：「我的餐盤」與每日飲食指南。</li>
+    <li id="r22">衛生福利部國民健康署：成人健康體位標準（BMI 與腰圍）。</li>
+    <li id="r23">Watson NF, et al. Recommended Amount of Sleep for a Healthy Adult: A Joint Consensus Statement of the AASM and SRS. <i>Sleep</i>. 2015;38:843–844.</li>
+    <li id="r24">Qaseem A, et al. Management of Chronic Insomnia Disorder in Adults: A Clinical Practice Guideline From the American College of Physicians. <i>Ann Intern Med</i>. 2016;165:125–133.</li>
+  </ol>
+</section>
+
+<p class="disc">本網頁為健康促進知識整理，依據國際與台灣的臨床指引與研究撰寫，不能取代醫療專業人員的診斷與建議。每個人的身體狀況不同，是否需要檢查、藥物或其他治療，請和你的醫師討論。</p>
+</main>
+
+<footer>
+  <b>愛迪樂健康促進團隊</b>　鍾孟修 職能治療師 整理<br>
+  <a href="https://www.facebook.com/profile.php?id=100063748491881" target="_blank" rel="noopener">追蹤臉書粉專，取得更多健康資源</a>
+</footer>
+
+<button class="totop" id="totop" aria-label="回到頁首">↑</button>
+
+<script>
+(function(){
+  const items=[
+    {id:'bp',n:'血壓',t:'num'},{id:'lipid',n:'血脂',t:'num'},{id:'glucose',n:'血糖',t:'num'},{id:'smoke',n:'無菸',t:'hab'},
+    {id:'diet',n:'飲食',t:'hab'},{id:'move',n:'活動',t:'hab'},{id:'weight',n:'體重',t:'num'},{id:'sleep',n:'睡眠',t:'hab'}
+  ];
+  const labels={bp:'血壓 < 120/80',lipid:'血脂在理想範圍',glucose:'空腹血糖 < 100',smoke:'不吸菸、家中無菸',diet:'飲食接近我的餐盤',move:'每週活動 150 分鐘',weight:'BMI 18.5–24',sleep:'每晚睡 7–9 小時'};
+  let state={};
+  try{ state=JSON.parse(localStorage.getItem('le8-state')||'{}'); }catch(e){ state={}; }
+  const svg=document.getElementById('wheel'), NS='http://www.w3.org/2000/svg';
+  const cx=200,cy=200,R=185,r=78;
+  function css(v){return getComputedStyle(document.documentElement).getPropertyValue(v).trim();}
+  function arc(a0,a1){
+    const p=(a,rr)=>[cx+rr*Math.cos(a),cy+rr*Math.sin(a)];
+    const [x0,y0]=p(a0,R),[x1,y1]=p(a1,R),[x2,y2]=p(a1,r),[x3,y3]=p(a0,r);
+    return `M${x0} ${y0}A${R} ${R} 0 0 1 ${x1} ${y1}L${x2} ${y2}A${r} ${r} 0 0 0 ${x3} ${y3}Z`;
+  }
+  const segs=[];
+  items.forEach((it,i)=>{
+    const gap=0.025, a0=-Math.PI/2+i*Math.PI/4+gap, a1=-Math.PI/2+(i+1)*Math.PI/4-gap;
+    const path=document.createElementNS(NS,'path');
+    path.setAttribute('d',arc(a0,a1)); path.setAttribute('class','seg'); path.setAttribute('tabindex','0');
+    path.setAttribute('role','link'); path.setAttribute('aria-label',it.n+'，前往說明');
+    path.addEventListener('click',()=>document.getElementById(it.id).scrollIntoView());
+    path.addEventListener('keydown',e=>{if(e.key==='Enter')document.getElementById(it.id).scrollIntoView();});
+    svg.appendChild(path);
+    const am=(a0+a1)/2, tr=(R+r)/2;
+    const tx=document.createElementNS(NS,'text');
+    tx.setAttribute('x',cx+tr*Math.cos(am)); tx.setAttribute('y',cy+tr*Math.sin(am)+8);
+    tx.setAttribute('text-anchor','middle'); tx.setAttribute('font-size','24'); tx.textContent=it.n;
+    svg.appendChild(tx);
+    segs.push({path,tx,it});
+  });
+  const cnum=document.createElementNS(NS,'text');
+  cnum.setAttribute('x',cx);cnum.setAttribute('y',cy+10);cnum.setAttribute('text-anchor','middle');cnum.setAttribute('font-size','46');
+  svg.appendChild(cnum);
+  const csub=document.createElementNS(NS,'text');
+  csub.setAttribute('x',cx);csub.setAttribute('y',cy+40);csub.setAttribute('text-anchor','middle');csub.setAttribute('font-size','17');csub.textContent='項做到了';
+  svg.appendChild(csub);
+
+  const checks=document.getElementById('checks');
+  items.forEach(it=>{
+    const b=document.createElement('button'); b.type='button'; b.className='cb'+(it.t==='hab'?' habit':'');
+    b.innerHTML='<span class="bx">✓</span><span>'+labels[it.id]+'</span>';
+    b.setAttribute('aria-pressed',!!state[it.id]);
+    b.onclick=()=>{state[it.id]=!state[it.id]; b.setAttribute('aria-pressed',!!state[it.id]); save(); render();};
+    checks.appendChild(b);
+  });
+  function save(){ try{ localStorage.setItem('le8-state',JSON.stringify(state)); }catch(e){} }
+  function render(){
+    let n=0;
+    segs.forEach(s=>{
+      const on=!!state[s.it.id]; if(on)n++;
+      const full=s.it.t==='num'?css('--num'):css('--hab');
+      const light=s.it.t==='num'?css('--num2'):css('--hab2');
+      s.path.setAttribute('fill',on?full:light);
+      s.tx.setAttribute('fill',on?'#fff':css('--ink'));
+    });
+    cnum.textContent=n+' / 8'; cnum.setAttribute('fill',css('--ink')); csub.setAttribute('fill',css('--soft'));
+    const m=document.getElementById('scoreMsg');
+    m.textContent = n===8 ? '八項都做到了！繼續保持，也帶身邊的人一起。'
+      : n>=5 ? '很棒！挑一項還沒做到的，當作下一個目標。'
+      : '挑一項還沒做到的，從今天開始。點輪子看做法。';
+  }
+  render();
+  matchMedia('(prefers-color-scheme: dark)').addEventListener?.('change',render);
+
+  // BP tool
+  document.getElementById('bpBtn').onclick=()=>{
+    const s=+document.getElementById('sbp').value, d=+document.getElementById('dbp').value, o=document.getElementById('bpOut');
+    if(!s||!d){o.textContent='請輸入收縮壓與舒張壓的平均值。';return;}
+    let t,c;
+    if(s>=180||d>=120){t='非常高：如果合併胸痛、喘、頭痛、無力等症狀，請立即就醫；沒有症狀也請盡快就診。';c='#C2412D';}
+    else if(s>=130||d>=80){t='已達高血壓標準（130/80 以上）：請帶著居家血壓紀錄和醫師討論。';c='#E8603F';}
+    else if(s>=120){t='偏高（120–129 / 小於 80）：還不是高血壓，但已超過理想值，從減鈉、運動開始。';c='#B7771A';}
+    else {t='理想（小於 120/80）：繼續保持，定期量測。';c='#0E8A7E';}
+    o.innerHTML=t.replace(/^([^：]+)：/,'<span class="pill" style="background:'+c+';margin:0 8px 0 0">$1</span>');
+  };
+  // BMI tool
+  document.getElementById('bmiBtn').onclick=()=>{
+    const h=+document.getElementById('ht').value/100, w=+document.getElementById('wt').value, o=document.getElementById('bmiOut');
+    if(!h||!w){o.textContent='請輸入身高與體重。';return;}
+    const b=w/(h*h); let t,c;
+    if(b<18.5){t='過輕';c='#B7771A';} else if(b<24){t='健康體位';c='#0E8A7E';} else if(b<27){t='過重';c='#E8603F';} else {t='肥胖';c='#C2412D';}
+    o.innerHTML='BMI <b>'+b.toFixed(1)+'</b><span class="pill" style="background:'+c+'">'+t+'</span><br><span style="font-weight:500;font-size:16px;color:var(--soft)">台灣成人標準：18.5–24 健康、24–27 過重、27 以上肥胖。長輩請同時留意肌肉量，不宜過瘦。</span>';
+  };
+
+  // nav highlight
+  const links=[...document.querySelectorAll('#navlinks a')];
+  const io=new IntersectionObserver(es=>{
+    es.forEach(e=>{ if(e.isIntersecting){ links.forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id)); const on=links.find(a=>a.classList.contains('on')); if(on){const box=on.parentElement; box.scrollTo({left:on.offsetLeft-box.clientWidth/2+on.offsetWidth/2});} } });
+  },{rootMargin:'-40% 0px -55% 0px'});
+  document.querySelectorAll('section.es,#refs').forEach(s=>io.observe(s));
+  const tt=document.getElementById('totop');
+  addEventListener('scroll',()=>tt.classList.toggle('show',scrollY>900),{passive:true});
+  tt.onclick=()=>scrollTo({top:0});
+})();
+</script>
+</body>
+</html>
